@@ -191,7 +191,7 @@ public class TimerActivity extends Activity implements View.OnClickListener{
                 mHandler.sendMessage(message);
                 //Log.d(TAG,""+t);
             }
-        },600,998);
+        },600,997);
     }
 
     private Handler mHandler = new Handler(){
@@ -252,7 +252,6 @@ public class TimerActivity extends Activity implements View.OnClickListener{
                 //sum.setText("btn" + "");
                 mTimer = new Timer();
                 setTimerTask();
-                myTimer.setTime(25);
                 myTimer.setStart();
                 t=0;
 
