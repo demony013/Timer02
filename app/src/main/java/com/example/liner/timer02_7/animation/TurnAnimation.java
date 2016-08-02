@@ -70,7 +70,7 @@ public class TurnAnimation extends Animation {
             camera.translate(0.0f,0.0f,mDepthZ*(1-interpolatedTime));
         }
 
-        camera.rotateY(degrees);
+        camera.rotateX(degrees);
         //取得变换后的矩阵
         camera.getMatrix(matrix);
         camera.restore();
@@ -82,5 +82,7 @@ public class TurnAnimation extends Animation {
 
         matrix.preTranslate(-centerX,-centerY);
         matrix.postTranslate(centerX,centerY);
+
+
     }
 }

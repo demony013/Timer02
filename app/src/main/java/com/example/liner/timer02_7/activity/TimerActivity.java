@@ -1,6 +1,7 @@
 package com.example.liner.timer02_7.activity;
 
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.os.Bundle;
@@ -66,6 +67,7 @@ public class TimerActivity extends Activity implements View.OnClickListener{
     private List<Timer02> timer02List;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private int sum;
+    private boolean item_state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -73,7 +75,7 @@ public class TimerActivity extends Activity implements View.OnClickListener{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.timer_layout);
         init();
-        //rLinearLayout = (RoundRectLinearLayout) findViewById(R.id.btn);
+
 
 
 
@@ -83,15 +85,18 @@ public class TimerActivity extends Activity implements View.OnClickListener{
                 final Timer02 timer02 = timer02List.get(position);
                 Log.d(TAG,""+position);
 
-                //final TextView btn_test=(TextView) view.findViewById(R.id.btn_test);
-                //final EditText edit=(EditText) view.findViewById(R.id.list_edit);
-                //final TextView text = (TextView) view.findViewById(R.id.list_text2);
+
                 LinearLayout list_layout = (LinearLayout) view.findViewById(R.id.list_layout);
+                list_layout.setPivotY(0);
                 if (list_layout.getVisibility()==View.GONE){
                     list_layout.setVisibility(View.VISIBLE);
+                    item_state=false;
+                    turnX(list_layout,-90,0);
 
                 }else{
-                    list_layout.setVisibility(View.GONE);
+                    item_state=true;
+                    turnX(list_layout,0,-90);
+
                 }
 
 
@@ -100,6 +105,35 @@ public class TimerActivity extends Activity implements View.OnClickListener{
             }
         });
 
+    }
+
+    public void turnX(final View view, float s, float e){
+        ObjectAnimator animator = ObjectAnimator.ofFloat(view,"rotationX",s,e);
+        animator.setDuration(1000);
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                if (item_state){
+                    view.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+        animator.start();
     }
 
     private void init(){

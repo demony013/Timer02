@@ -65,7 +65,8 @@
                         android:layout_height="match_parent"
                         android:text="编辑"
                         android:textSize="24sp"
-                        android:textColor="#ffffff"/>
+                        android:textColor="#ffffff"
+                        />
 
                 </LinearLayout>
             </LinearLayout>
