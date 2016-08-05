@@ -68,6 +68,7 @@ public class TimerActivity extends Activity implements View.OnClickListener{
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private int sum;
     private boolean item_state;
+    private boolean doing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -151,6 +152,7 @@ public class TimerActivity extends Activity implements View.OnClickListener{
         myTimer.setTime(25);
         atime = 1500;
         time_show.setText("25:00");
+        doing= false;
 
         adapter = new TimerAdapter(this,R.layout.list_item,datalist);
         listView.setAdapter(adapter);
@@ -250,14 +252,21 @@ public class TimerActivity extends Activity implements View.OnClickListener{
         switch (v.getId()){
             case R.id.btn:
                 //sum.setText("btn" + "");
-                mTimer = new Timer();
-                setTimerTask();
-                myTimer.setStart();
-                t=0;
+                if (!doing){
+                    Log.e(TAG,""+doing);
+                    mTimer = new Timer();
+                    setTimerTask();
+                    myTimer.setStart();
+                    t=0;
+                    doing =true;
+                }else {
+                    //doing = false;
+                }
 
 
                 break;
             case R.id.list_btn:
+
                 if (listView.getVisibility()==View.GONE){
                     queryTime();
                     listView.setVisibility(View.VISIBLE);
@@ -298,6 +307,7 @@ public class TimerActivity extends Activity implements View.OnClickListener{
                 queryTime();
                 break;
             case R.id.timer:
+                doing=false;
                 chooseState();
                 break;
             default:
